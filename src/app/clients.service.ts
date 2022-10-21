@@ -13,11 +13,9 @@ export class ClientsService {
 
   }
 
-
   save(client : Client): Observable<Client>{
     return this.http.post<Client>('http://localhost:8080/api/clients', client)
   }
-
 
   getClient() : Client{
     let client : Client = new Client();
