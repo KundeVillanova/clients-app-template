@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'
 import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientsFormComponent } from './clients-form/clients-form.component';
+import { ClientListComponent } from './client-list/client-list.component';
 
 
 @NgModule({
   declarations: [
-    ClientsFormComponent
+    ClientsFormComponent,
+    ClientListComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { ClientsFormComponent } from './clients-form/clients-form.component';
     FormsModule
   ],
   exports: [
-    ClientsFormComponent
+    ClientsFormComponent,
+    ClientListComponent
   ]
 })
 export class ClientsModule { }

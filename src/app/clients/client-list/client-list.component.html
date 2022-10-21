@@ -1,0 +1,36 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4"><li class="breadcrumb-item active">Clientes Registrados</li></ol>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-success"><i class="fa fa-plus"></i> Novo cliente</button>    
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-condensed table-hover">
+                    <thead>
+                       <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Cpf</th>
+                            <th>Data de cadastro</th>
+                            <th></th>
+                       </tr>     
+                    </thead>
+
+                    <tbody *ngFor="let client of clients">
+                      <tr>
+                        <td>{{ client.id}}</td>
+                        <td>{{ client.name}}</td>
+                        <td>{{ client.cpf}}</td>
+                        <td>{{ client.date}}</td>
+                        <td></td>
+                      </tr>          
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
