@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../client'
 import { ClientsService } from '../../clients.service'
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-clients-form',
@@ -13,24 +15,51 @@ export class ClientsFormComponent implements OnInit {
   success:boolean =false;
   errors:String[];
 
-  constructor( private service : ClientsService) { 
-     this.client = new Client();
-  }
+  constructor( 
+    private service : ClientsService, 
+    private router : Router,
+    private activatedRoute : ActivatedRoute
+  ) { this.client = new Client();}
 
-  onSubmit(){
-    // callaback ao dar submit no form de clientes, será mostrado a mensagem ou de sucesso ou de erro
-    this.service.save(this.client).subscribe(
-    successResponse =>{
+  onSubmit(){ 
+    if(this.client.id){
+      this.service.update(this.client).subscribe( successResponse =>{
         this.success=true;
         this.errors=null;
-        this.client = successResponse;
-    }, 
-    errorResponse =>{
-        this.success= false;
-        this.errors = errorResponse.error.errors;      
+    }, error =>{
+        this.errors = ['Update has Fail !']
+    })
+    }
+    else{
+       // callaback ao dar submit no form de clientes, será mostrado a mensagem ou de sucesso ou de erro
+      this.service.save(this.client).subscribe(
+        successResponse =>{
+            this.success=true;
+            this.errors=null;
+            this.client = successResponse;
+      }, 
+        errorResponse =>{
+            this.success= false;
+            this.errors = errorResponse.error.errors;      
+      })
+    }
+  }
+
+  ngOnInit(): void {
+    let params : Observable<Params> = this.activatedRoute.params
+    params.subscribe( urlParams=>{
+      this.client.id = urlParams['id'];
+      if(this.client.id){
+        this.service
+        .getCLienteById(this.client.id)
+        .subscribe(
+          response => this.client = response, 
+          errorResponse => this.client = new Client()
+      )
+      }
     })
   }
 
-  ngOnInit(): void {}
+  voltarListagem(){ this.router.navigate(['/clients-list']) }
 
 }
