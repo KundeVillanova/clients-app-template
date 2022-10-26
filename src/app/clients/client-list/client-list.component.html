@@ -2,6 +2,18 @@
 <ol class="breadcrumb mb-4"><li class="breadcrumb-item active">Clientes Registrados</li></ol>
 
     <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="msgSucesso">
+                    {{msgSucesso}}
+                </div>    
+                <div class="alert alert-danger" role="alert" *ngIf="msgFracasso">
+                    {{msgFracasso}}
+                </div>        
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-2">
                 <button class="btn btn-success" (click)="redirecionarCadastro()">
@@ -32,10 +44,33 @@
                             <button class="btn btn-primary" routerLink="/clients-form/{{client.id}}">
                                 <i class="fa fa-edit"></i> Edit
                             </button>
+
+                            <button class="btn btn-danger ml-2" 
+                                data-toggle="modal" data-target="#modalDelect" (click)="preparaDelect(client)">
+                                <i class="fa fa-trash"></i> 
+                            </button>
                         </td>
                       </tr>          
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <div id="modalDelect" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Confirmação de deleção</h4>
+                    </div>
+                    <div class="modal-body">
+                        Deseja mesmo excluir o(a) cliente {{clientSelected.name}} ?
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" (click)="deletClient()" data-dismiss="modal">Confirma</button>
+                        <button class="btn btn-warning ml-1" data-dismiss="modal">Cancela</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
     </div>
