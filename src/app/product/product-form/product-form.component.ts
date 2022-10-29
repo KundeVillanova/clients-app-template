@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../clients/client';
 import { ClientsService } from '../../clients.service';
-
+import { Product } from '../product';
+import { ProductService } from '../../product.service';
 
 @Component({
   selector: 'app-product-form',
@@ -10,12 +11,14 @@ import { ClientsService } from '../../clients.service';
 })
 export class ProductFormComponent implements OnInit {
 
+  product : Product
   clients : Client[] = []
 
   constructor(
-    private clientService : ClientsService
+    private clientService : ClientsService,
+    private service : ProductService
   ) { 
-
+    this.product = new Product
   }
 
   ngOnInit(): void {
@@ -23,7 +26,9 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    this.service.save(this.product).subscribe(response => {
+      console.log(response)
+    })
   }  
   
 

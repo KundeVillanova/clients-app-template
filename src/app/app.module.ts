@@ -10,6 +10,8 @@ import { ClientsModule } from './clients/clients.module';
 import { ClientsService } from './clients.service'
 import { HttpClientModule } from '@angular/common/http'
 import { ProductModule } from  './product/product.module'
+import { ProductService } from  './product.service'
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { ProductModule } from  './product/product.module'
     ProductModule
   ],
   providers: [
-    ClientsService
+    ClientsService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
