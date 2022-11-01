@@ -13,6 +13,8 @@ export class ProductFormComponent implements OnInit {
 
   product : Product
   clients : Client[] = []
+  success:boolean =false;
+  errors:String[];
 
   constructor(
     private clientService : ClientsService,
@@ -26,8 +28,15 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.service.save(this.product).subscribe(response => {
-      console.log(response)
+    this.service.save(this.product).subscribe(
+      successResponse =>{
+          this.success=true;
+          this.errors=null;
+          this.product = new Product();
+    }, 
+      errorResponse =>{
+          this.success= false;
+          this.errors = errorResponse.error.errors;      
     })
   }  
   
