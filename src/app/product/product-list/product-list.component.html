@@ -1,1 +1,78 @@
-<p>product-list works!</p>
+<h1 class="mt-4">Serviços prestados</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+
+<div class="container">
+    <form #consultaForm="ngForm" (submit)="consultar()">
+        <div class="row">
+            <div class="column col-md-6">
+                <label for="inputname">Nome do cliente</label>
+                <input type="text" name="name" id="inputname" [(ngModel)]="name" class="form-control">
+            </div>
+            <div class="column col-md-6">
+                <label for="inputMes">Mês</label>
+                <select [(ngModel)]="mes" class="form-control" name="mes">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let mes of meses" [value]="mes" >{{mes}}</option>
+                </select>
+            </div>
+        </div>  
+    
+        <br>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-search"></i> Consultar
+                </button>
+
+                <button  class="btn btn-success ml-2" routerLink="/product-form">
+                    <i class="fa fa-plus"></i> Cadastrar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <br />
+
+    <div class="row">
+       
+        <div class="alert alert-danger" role="alert" *ngIf="msg">
+            {{msg}}
+        </div>    
+
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of lista">
+                        <td>{{ s.client.name }}</td>
+                        <td>{{ s.description }}</td>
+                        <td>{{ s.price }}</td>
+                        <td>{{ s.data }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
