@@ -23,7 +23,8 @@ export class LoginComponent  {
     console.log(`User: ${this.username}, Pass: ${this.password}`)
   }
 
-  preparaCadastro(){
+  preparaCadastro(event){
+    event.preventDefault();
     this.cadastrando = true; 
   }
 
