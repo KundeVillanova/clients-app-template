@@ -28,7 +28,7 @@ export class ClientListComponent implements OnInit {
   
   redirecionarCadastro(){
     //quando clicar no new cliente a navegação passa por aqui
-    this.router.navigate(['/clients-form'])
+    this.router.navigate(['/clients/form'])
   }
   
   preparaDelect(client : Client){
